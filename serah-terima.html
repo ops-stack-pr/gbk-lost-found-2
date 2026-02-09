@@ -23,6 +23,8 @@
     .btn-primary:disabled { background: #9ca3af; cursor: not-allowed; }
     .btn-location { background: #3b82f6; color: #fff; }
     .btn-location:hover { background: #2563eb; }
+    .btn-secondary { background: #6b7280; color: #fff; margin-top: 5px; }
+    .btn-secondary:hover { background: #4b5563; }
     .location-info { margin-top: 12px; padding: 12px; background: #dbeafe; border-radius: 8px; font-size: 14px; display: none; }
     .location-info.active { display: block; }
     .success-message { display: none; padding: 32px; text-align: center; }
@@ -31,8 +33,8 @@
     .help-text { font-size: 13px; color: #6b7280; margin-top: 6px; }
     .info-box { background: #dbeafe; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; }
     .signature-pad { border: 2px solid #e5e7eb; border-radius: 8px; cursor: crosshair; background: #fafafa; }
-    .btn-secondary { background: #6b7280; color: #fff; margin-top: 5px; }
-    .btn-secondary:hover { background: #4b5563; }
+    h3 { margin: 32px 0 16px; color: #10b981; border-bottom: 2px solid #10b981; padding-bottom: 8px; font-size: 18px; }
+    h3:first-of-type { margin-top: 0; }
   </style>
 </head>
 <body>
@@ -50,7 +52,7 @@
 
       <form id="serahTerimaForm">
         <!-- PENERIMA SECTION -->
-        <h3 style="margin-bottom:16px; color:#10b981; border-bottom:2px solid #10b981; padding-bottom:8px;">📦 Data Penerima</h3>
+        <h3>📦 Data Penerima</h3>
         
         <div class="form-group">
           <label class="form-label">Nama Lengkap Penerima <span class="required">*</span></label>
@@ -80,36 +82,61 @@
         </div>
 
         <!-- BARANG SECTION -->
-        <h3 style="margin:32px 0 16px; color:#10b981; border-bottom:2px solid #10b981; padding-bottom:8px;">🎒 Data Barang</h3>
+        <h3>🎒 Data Barang</h3>
 
         <div class="form-group">
-          <label class="form-label">Nomor Laporan (Lost/Found) <span class="required">*</span></label>
-          <input type="text" class="form-input" id="reportNumber" required placeholder="Contoh: Row 5, Row 12">
-          <p class="help-text">Nomor baris di Google Sheet atau nomor laporan</p>
+          <label class="form-label">Nomor Baris di Sheet / Nomor Laporan</label>
+          <input type="text" class="form-input" id="reportNumber" placeholder="Contoh: Baris 15, atau LOST-456">
+          <p class="help-text">Cek di Google Sheet atau kosongkan jika tidak tahu - akan cocokkan dengan deskripsi</p>
         </div>
 
         <div class="form-group">
           <label class="form-label">Jenis Barang <span class="required">*</span></label>
-          <input type="text" class="form-input" id="itemType" required placeholder="Contoh: Dompet, Handphone">
+          <select class="form-select" id="itemType" required>
+            <option value="">Pilih jenis barang</option>
+            <option value="Dompet">Dompet</option>
+            <option value="Handphone">Handphone</option>
+            <option value="Tas/Ransel">Tas/Ransel</option>
+            <option value="Kunci">Kunci</option>
+            <option value="Dokumen/KTP/SIM">Dokumen/KTP/SIM</option>
+            <option value="Kartu Kredit/Debit">Kartu Kredit/Debit</option>
+            <option value="Kacamata">Kacamata</option>
+            <option value="Jam Tangan">Jam Tangan</option>
+            <option value="Perhiasan/Aksesoris">Perhiasan/Aksesoris</option>
+            <option value="Pakaian/Jaket">Pakaian/Jaket</option>
+            <option value="Sepatu/Sendal">Sepatu/Sendal</option>
+            <option value="Botol Minum/Tumbler">Botol Minum/Tumbler</option>
+            <option value="Powerbank/Charger">Powerbank/Charger</option>
+            <option value="Earphone/Headset">Earphone/Headset</option>
+            <option value="Payung">Payung</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Kondisi Barang <span class="required">*</span></label>
+          <label class="form-label">Deskripsi Barang <span class="required">*</span></label>
+          <textarea class="form-textarea" id="itemDescription" required placeholder="Warna, merek, ciri-ciri khusus untuk memverifikasi kepemilikan"></textarea>
+          <p class="help-text">Petugas akan cocokkan dengan laporan asli untuk verifikasi</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kondisi Barang Saat Diserahkan <span class="required">*</span></label>
           <select class="form-select" id="itemCondition" required>
             <option value="">Pilih kondisi</option>
             <option value="Baik/Utuh">Baik/Utuh</option>
             <option value="Rusak Ringan">Rusak Ringan</option>
             <option value="Rusak Berat">Rusak Berat</option>
+            <option value="Tidak Lengkap/Ada yang Hilang">Tidak Lengkap/Ada yang Hilang</option>
           </select>
         </div>
 
         <div class="form-group">
           <label class="form-label">Catatan Tambahan</label>
-          <textarea class="form-textarea" id="notes" placeholder="Kondisi detail, dokumen tambahan, dll"></textarea>
+          <textarea class="form-textarea" id="notes" placeholder="Kondisi detail, dokumen tambahan yang diserahkan, dll"></textarea>
         </div>
 
         <!-- STAFF SECTION -->
-        <h3 style="margin:32px 0 16px; color:#10b981; border-bottom:2px solid #10b981; padding-bottom:8px;">👤 Petugas GBK</h3>
+        <h3>👤 Petugas GBK</h3>
 
         <div class="form-group">
           <label class="form-label">Nama Petugas <span class="required">*</span></label>
@@ -117,12 +144,33 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Badge/ID Petugas <span class="required">*</span></label>
-          <input type="text" class="form-input" id="staffBadge" required placeholder="Contoh: SEC-089, ADMIN-012">
+          <label class="form-label">Unit/Departemen <span class="required">*</span></label>
+          <select class="form-select" id="staffUnit" required>
+            <option value="">Pilih unit</option>
+            <option value="Keamanan">Keamanan</option>
+            <option value="Kebersihan">Kebersihan</option>
+            <option value="Unit Stadion Utama">Unit Stadion Utama</option>
+            <option value="Unit Stadion Akuatik">Unit Stadion Akuatik</option>
+            <option value="Unit Istora">Unit Istora</option>
+            <option value="Unit Kawasan">Unit Kawasan</option>
+            <option value="Unit Parkir Timur dan Hutan Kota">Unit Parkir Timur dan Hutan Kota</option>
+            <option value="Unit Tenis">Unit Tenis</option>
+            <option value="Unit Basket dan Lapangan">Unit Basket dan Lapangan</option>
+            <option value="Unit Gedung Konvensi (JICC)">Unit Gedung Konvensi (JICC)</option>
+            <option value="Unit Indonesia Arena">Unit Indonesia Arena</option>
+            <option value="Unit Kantor Pusat dan MOS">Unit Kantor Pusat dan MOS</option>
+          </select>
+          <p class="help-text">Pilih unit tempat petugas bertugas</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Unit (Opsional)</label>
+          <input type="email" class="form-input" id="staffEmail" placeholder="Contoh: stadion.utama@gbk.id">
+          <p class="help-text">Email unit untuk copy bukti serah terima</p>
         </div>
 
         <!-- LOCATION SECTION -->
-        <h3 style="margin:32px 0 16px; color:#10b981; border-bottom:2px solid #10b981; padding-bottom:8px;">📍 Lokasi & Waktu</h3>
+        <h3>📍 Lokasi & Waktu</h3>
 
         <div class="form-group">
           <label class="form-label">Lokasi Serah Terima <span class="required">*</span></label>
@@ -136,16 +184,16 @@
         </div>
 
         <!-- PHOTO SECTION -->
-        <h3 style="margin:32px 0 16px; color:#10b981; border-bottom:2px solid #10b981; padding-bottom:8px;">📸 Dokumentasi</h3>
+        <h3>📸 Dokumentasi</h3>
 
         <div class="form-group">
           <label class="form-label">Foto Bukti Serah Terima <span class="required">*</span></label>
           <input type="file" class="form-input" id="photoSerahTerima" accept="image/*" required style="padding:8px;">
-          <p class="help-text">Wajib: Foto barang + penerima bersama petugas</p>
+          <p class="help-text">Wajib: Foto barang + penerima bersama petugas atau tanda terima</p>
         </div>
 
         <!-- SIGNATURE SECTION -->
-        <h3 style="margin:32px 0 16px; color:#10b981; border-bottom:2px solid #10b981; padding-bottom:8px;">✍️ Tanda Tangan Digital</h3>
+        <h3>✍️ Tanda Tangan Digital</h3>
 
         <div class="form-group">
           <label class="form-label">Tanda Tangan Penerima <span class="required">*</span></label>
@@ -155,9 +203,11 @@
         </div>
 
         <div class="form-group" style="margin-top:24px;">
-          <label style="display:flex; align-items:center; cursor:pointer;">
-            <input type="checkbox" id="agreement" required style="width:auto; margin-right:8px;">
-            <span style="font-size:14px;">Saya menyatakan telah menerima barang dalam kondisi sesuai dan melepaskan GBK dari tanggung jawab atas barang ini. <span class="required">*</span></span>
+          <label style="display:flex; align-items:flex-start; cursor:pointer;">
+            <input type="checkbox" id="agreement" required style="width:auto; margin-right:8px; margin-top:4px;">
+            <span style="font-size:14px; line-height:1.6;">
+              Saya menyatakan telah menerima barang dalam kondisi sesuai yang tercantum di atas dan membebaskan PPKGBK dari segala tanggung jawab atas barang ini. Saya memahami bahwa GBK hanya memfasilitasi Lost & Found dan tidak bertanggung jawab atas kerusakan atau kehilangan selama masa penyimpanan. <span class="required">*</span>
+            </span>
           </label>
         </div>
 
@@ -168,7 +218,7 @@
         <div class="success-icon">✅</div>
         <h2 style="color:#10b981; margin-bottom:12px;">Serah Terima Berhasil!</h2>
         <p style="margin-bottom:12px;">Nomor Referensi: <strong id="finalRefNumber"></strong></p>
-        <p style="margin-bottom:24px;">📧 Bukti PDF telah dikirim ke email Anda (jika diisi)</p>
+        <p style="margin-bottom:24px;">📧 Bukti PDF telah dikirim ke email (jika diisi)</p>
         <p style="font-size:14px; color:#6b7280; margin-bottom:24px;">Petugas dapat mencetak bukti dari sistem</p>
         <button class="btn btn-primary" onclick="window.location.href='https://ops-stack-pr.github.io/gbk-lost-found/'">Kembali ke Home</button>
       </div>
@@ -312,16 +362,18 @@
         idNumber: document.getElementById('idNumber').value,
         reportNumber: document.getElementById('reportNumber').value,
         itemType: document.getElementById('itemType').value,
+        itemDescription: document.getElementById('itemDescription').value,
         itemCondition: document.getElementById('itemCondition').value,
         notes: document.getElementById('notes').value,
         staffName: document.getElementById('staffName').value,
-        staffBadge: document.getElementById('staffBadge').value,
+        staffUnit: document.getElementById('staffUnit').value,
+        staffEmail: document.getElementById('staffEmail').value,
         latitude: document.getElementById('latitude').value,
         longitude: document.getElementById('longitude').value,
         photoKTP: photoKTPBase64,
         photoSerahTerima: photoSerahTerimaBase64,
         signature: signatureBase64,
-        PIC: document.getElementById('staffBadge').value,
+        PIC: document.getElementById('staffUnit').value,
         STATUS: 'DISERAHKAN'
       };
 

@@ -235,36 +235,5 @@
         });
     });
   </script>
-  document.addEventListener('DOMContentLoaded', function() {
-  // Your existing code (GPS, form submit, etc.)
-  
-  // ADD THIS NEW SECTION FOR KTP VALIDATION
-  const ktpInput = document.getElementById('idNumber');
-  
-  ktpInput.addEventListener('input', function(e) {
-    // Only allow digits, max 16 characters
-    this.value = this.value.replace(/\D/g, '').slice(0, 16);
-    
-    // Validate format when 16 digits entered
-    if (this.value.length === 16) {
-      const birthDate = this.value.substring(6, 12); // Position 7-12 = DDMMYY
-      const day = parseInt(birthDate.substring(0, 2));
-      const month = parseInt(birthDate.substring(2, 4));
-      
-      // KTP format: day 01-31 (male) or 41-71 (female), month 01-12
-      const validDay = (day >= 1 && day <= 31) || (day >= 41 && day <= 71);
-      const validMonth = month >= 1 && month <= 12;
-      
-      if (!validDay || !validMonth) {
-        this.setCustomValidity('Format NIK tidak valid (periksa tanggal lahir)');
-        this.reportValidity();
-      } else {
-        this.setCustomValidity('');
-      }
-    }
-  });
-  
-  // Your existing form.addEventListener('submit', ...) code below
-});
 </body>
 </html>

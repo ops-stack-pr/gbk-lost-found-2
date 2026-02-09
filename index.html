@@ -1,31 +1,216 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>GBK Lost & Found</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,sans-serif;background:linear-gradient(135deg,#fef2f2,#fee2e2);padding:20px;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.container{max-width:600px;width:100%;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.1);padding:48px 32px;text-align:center}
-h1{font-size:32px;margin-bottom:12px;color:#1f2937}
-p{color:#6b7280;margin-bottom:32px}
-.buttons{display:flex;gap:16px;flex-direction:column}
-.btn{padding:20px;border:none;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;text-decoration:none;display:block;color:#fff;transition:.3s}
-.btn-lost{background:#ef4444}
-.btn-lost:hover{background:#dc2626;transform:translateY(-2px)}
-.btn-found{background:#10b981}
-.btn-found:hover{background:#059669;transform:translateY(-2px)}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GBK Lost & Found System</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header {
+      text-align: center;
+      color: #fff;
+      padding: 40px 20px;
+      margin-bottom: 40px;
+    }
+    .header h1 { font-size: 42px; margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    .header p { font-size: 18px; opacity: 0.9; }
+    
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    
+    .card-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    
+    .card h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+    
+    .card p {
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .card.lost { border-top: 4px solid #f59e0b; }
+    .card.found { border-top: 4px solid #3b82f6; }
+    .card.handover { border-top: 4px solid #10b981; }
+    
+    .workflow {
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    
+    .workflow h3 {
+      text-align: center;
+      color: #1f2937;
+      margin-bottom: 24px;
+      font-size: 24px;
+    }
+    
+    .workflow-steps {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .workflow-step {
+      text-align: center;
+      flex: 1;
+      min-width: 150px;
+    }
+    
+    .workflow-step-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 12px;
+      color: #fff;
+    }
+    
+    .workflow-step p {
+      font-size: 14px;
+      color: #4b5563;
+      font-weight: 600;
+    }
+    
+    .arrow {
+      font-size: 32px;
+      color: #9ca3af;
+    }
+    
+    .footer {
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+      opacity: 0.9;
+    }
+    
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .workflow-steps { flex-direction: column; }
+      .arrow { transform: rotate(90deg); margin: 8px 0; }
+      .header h1 { font-size: 32px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-<h1>🔍 GBK Lost & Found</h1>
-<p>Formulir Laporan Barang Hilang & Ditemukan</p>
-<div class="buttons">
-<a href="lost.html" class="btn btn-lost">📢 Laporkan Barang Hilang</a>
-<a href="found.html" class="btn btn-found">✅ Laporkan Barang Ditemukan</a>
-</div>
-</div>
+  <div class="container">
+    <div class="header">
+      <h1>🏟️ GBK Lost & Found</h1>
+      <p>Sistem Pengelolaan Barang Hilang & Ditemukan</p>
+      <p style="font-size:14px; margin-top:8px;">Gelora Bung Karno Sports Complex</p>
+    </div>
+
+    <div class="cards-grid">
+      <a href="lost.html" class="card lost">
+        <div class="card-icon">🔍</div>
+        <h2>Lapor Barang Hilang</h2>
+        <p>Laporkan barang yang hilang di area GBK. Tim kami akan membantu mencari barang Anda.</p>
+      </a>
+
+      <a href="found.html" class="card found">
+        <div class="card-icon">📦</div>
+        <h2>Lapor Barang Ditemukan</h2>
+        <p>Menemukan barang yang tertinggal? Laporkan kepada kami untuk dikembalikan ke pemiliknya.</p>
+      </a>
+
+      <a href="serah-terima.html" class="card handover">
+        <div class="card-icon">✅</div>
+        <h2>Serah Terima Barang</h2>
+        <p>Form resmi untuk proses penyerahan barang dengan dokumentasi lengkap dan bukti digital.</p>
+      </a>
+    </div>
+
+    <div class="workflow">
+      <h3>📋 Alur Proses Lost & Found</h3>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="workflow-step-icon">1️⃣</div>
+          <p>Lapor Hilang/<br>Ditemukan</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="workflow-step">
+          <div class="workflow-step-icon">2️⃣</div>
+          <p>Tim GBK<br>Verifikasi</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="workflow-step">
+          <div class="workflow-step-icon">3️⃣</div>
+          <p>Pemilik<br>Dihubungi</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="workflow-step">
+          <div class="workflow-step-icon">4️⃣</div>
+          <p>Serah Terima<br>& Dokumentasi</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="workflow">
+      <h3>ℹ️ Informasi Penting</h3>
+      <ul style="list-style:none; padding:0; color:#4b5563; line-height:2;">
+        <li>📞 <strong>Hotline GBK:</strong> (021) 573-1865</li>
+        <li>📧 <strong>Email:</strong> info@gelora-bungkarno.co.id</li>
+        <li>🕐 <strong>Jam Operasional:</strong> Senin - Minggu, 08:00 - 20:00 WIB</li>
+        <li>📍 <strong>Lost & Found Office:</strong> Plaza Utara GBK (dekat Pintu Utama)</li>
+        <li>⏱️ <strong>Penyimpanan:</strong> Barang disimpan maksimal 90 hari</li>
+        <li>🔒 <strong>Privasi:</strong> Data Anda dilindungi sesuai UU PDP</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p><strong>© 2026 PPKGBK - Gelora Bung Karno</strong></p>
+      <p style="font-size:13px; margin-top:8px;">
+        Developed by <a href="mailto:ries.supomo@gmail.com">GBK Digital Team</a>
+      </p>
+    </div>
+  </div>
 </body>
 </html>

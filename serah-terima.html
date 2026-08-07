@@ -351,6 +351,10 @@
         reader.readAsDataURL(photoSerahTerima);
       });
 
+      const lat = document.getElementById('latitude').value;
+      const lng = document.getElementById('longitude').value;
+      const mapsLink = (lat && lng) ? `https://www.google.com/maps/place/${lat},${lng}` : '';
+
       const data = {
         formType: 'SERAH_TERIMA',
         referenceNumber: refNum,
@@ -366,8 +370,7 @@
         staffName: document.getElementById('staffName').value,
         staffUnit: document.getElementById('staffUnit').value,
         staffEmail: document.getElementById('staffEmail').value,
-        latitude: document.getElementById('latitude').value,
-        longitude: document.getElementById('longitude').value,
+        mapsLink: mapsLink, // <-- The formatted link
         photoKTP: photoKTPBase64,
         photoSerahTerima: photoSerahTerimaBase64,
         signature: signatureBase64,

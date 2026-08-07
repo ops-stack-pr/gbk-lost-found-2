@@ -213,20 +213,8 @@
         description: document.getElementById('description').value,
         foundLocation: document.getElementById('foundLocation').value,
         foundDateTime: document.getElementById('foundDateTime').value,
-    const lat = document.getElementById('latitude').value;
-      const lng = document.getElementById('longitude').value;
-      
-      // Generate the Google Maps URL
-      const mapsUrl = (lat && lng) ? `https://www.google.com/maps/search/?api=1&query=${lat},${lng}` : '';
-
-      const data = {
-        timestamp: new Date().toISOString(),
-        formType: 'FOUND', // Ensure this matches the form type (FOUND/LOST/SERAH_TERIMA)
-        // ... (keep all your other existing fields)
-        
-        // Replace or add the Maps URL
-        mapsLink: mapsUrl, 
-        
+        latitude: document.getElementById('latitude').value,
+        longitude: document.getElementById('longitude').value,
         photoBase64: photoBase64
       };
 

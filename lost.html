@@ -199,6 +199,10 @@
         });
       }
 
+      const lat = document.getElementById('latitude').value;
+      const lng = document.getElementById('longitude').value;
+      const mapsLink = (lat && lng) ? `https://www.google.com/maps/place/${lat},${lng}` : '';
+
       const data = {
         timestamp: new Date().toISOString(),
         formType: 'LOST',
@@ -209,8 +213,7 @@
         description: document.getElementById('description').value,
         lastLocation: document.getElementById('lastLocation').value,
         lostDateTime: document.getElementById('lostDateTime').value,
-        latitude: document.getElementById('latitude').value,
-        longitude: document.getElementById('longitude').value,
+        mapsLink: mapsLink, // <-- Replaces lat/lng with the formatted link
         photoBase64: photoBase64
       };
 

@@ -203,6 +203,14 @@
         reader.readAsDataURL(file);
       });
 
+      // 1. Get the coordinates first
+      const lat = document.getElementById('latitude').value;
+      const lng = document.getElementById('longitude').value;
+      
+      // 2. Generate the exact Google Maps link format that Sheets likes
+      const mapsLink = (lat && lng) ? `https://www.google.com/maps/place/${lat},${lng}` : '';
+
+      // 3. Send it in the data object
       const data = {
         timestamp: new Date().toISOString(),
         formType: 'FOUND',
@@ -213,8 +221,7 @@
         description: document.getElementById('description').value,
         foundLocation: document.getElementById('foundLocation').value,
         foundDateTime: document.getElementById('foundDateTime').value,
-        latitude: document.getElementById('latitude').value,
-        longitude: document.getElementById('longitude').value,
+        mapsLink: mapsLink, // <-- Sending the link instead of raw lat/lng
         photoBase64: photoBase64
       };
 
